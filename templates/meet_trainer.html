@@ -1,0 +1,72 @@
+{% extends "_layout.html" %}
+
+{% block title %}Meet the Trainers{% endblock %}
+
+{% block body %}  
+
+<script>
+function myFunction() {
+var input, filter, table, tr, td, i;
+  input = document.getElementById("input");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1]; // for name
+    td2 = tr[i].getElementsByTagName("td")[3]; // for specilties
+    if (td) {
+      if ( (td.innerHTML.toUpperCase().indexOf(filter) > -1) ||  (td2.innerHTML.toUpperCase().indexOf(filter) > -1) ) {            
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+} 
+</script>
+
+
+<style>
+#input {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width:100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+</style>
+<div class="container">
+    <h1> Meet the Trainers</h1>
+    <div class="row">
+      <div class="col">
+        <input type="text" id="input" onkeyup="myFunction()" placeholder="Search for trainer, specialties....">
+      </div>
+    </div>
+    <table class="table table-hover" id="table">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>specialties</th>
+          <th></th>
+        </tr>
+      </thead>  
+      <tbody>
+        {% for result in db_trainer %}
+        <tr>
+          <td><img src="{{result[1]}}" width="200"></td>
+          <td>{{result[2]}}</td>
+          <td>{{result[3]}}</td>
+          <td>{{result[4]}}</td>
+          <td><a class="btn btn-primary" href="/find_trainer?trainer_id={{result[0]}}" role="button">More info</a></td>
+        </tr>
+          {% endfor %}  
+      </tbody>
+    </table>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,73 @@
+{% extends "_layout.html" %}
+
+{% block title %}Member Profile{% endblock %}
+
+{% block body %}
+    <div class="container-md">
+
+
+        <div>           
+        {% from "_form_helper.html" import render_field %}
+        <form method="POST" class="form_wrapper container">
+            {{ form.csrf_token }}
+            
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h3>Login Details</h3>
+                        {{ render_field(form.email, True) }}
+                    </div>
+                    <br>
+        
+                    <div>
+                        <h3>Emergency Contact Details</h3>
+                        {{ render_field(form.emergency_name, readonly) }}
+                        {{ render_field(form.emergency_phone, readonly) }}
+                    </div>
+                </div>
+    
+                <div class="col">
+                    <h3>Personal Details</h3>
+                    <div class="row ">
+                        <span class="col">{{ render_field(form.first_name, readonly) }}</span>
+                        <span class="col">{{ render_field(form.last_name, readonly) }}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">{{ render_field(form.dob, True) }}</span>
+                        <span class="col">{{ render_field(form.gender, readonly) }}</span>
+                    </div>
+                                       
+                    {{ render_field(form.address, readonly) }}
+                    {{ render_field(form.phone, readonly) }} 
+                </div>
+            </div>                   
+            
+            <div class="form_btn">
+                {% if (session['role'] == 'member') and (version== 'view_member_profile') %}
+                <a type="button" 
+                    class="btn btn-primary"
+                    href="/update_member_profile">
+                    Update
+                </a>
+                {% endif %}
+                {% if (session['role'] == 'manager') and (version== 'view_member_profile') %}
+                <a type="button" 
+                class="btn btn-primary"
+                href="/update_member_profile?member_id={{member.userid}}">
+                Update
+                </a>
+                {% endif %}
+                {% if version== 'update_member_profile' %}
+                <a type="button"  
+                class="btn btn-light"
+                href="view_member_profile?member_id={{member.userid}}">
+                Cancel
+                </a>
+                {{ form.submit(class="btn btn-primary")}}            
+            {% endif %}
+            </div>
+            
+                
+            </form>
+        </div>
+{% endblock %}

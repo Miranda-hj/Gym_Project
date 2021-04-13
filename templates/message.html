@@ -1,0 +1,32 @@
+{% extends "_layout.html" %}
+
+{% block title %}Notification{% endblock %}
+
+{% block body %}
+    <p class="message">{{message}}</p>
+
+    {% if home %}
+    <p>
+    <a class="btn btn-primary" href="{{url_for('home')}}" role="button">Return home</a>
+    </p>
+    {% endif %}
+
+    {% if return_subscription %}
+    <p>
+    <a class="btn btn-primary" href="{{url_for('subscription')}}" role="button">Return</a>
+    </p>
+    {% endif %}
+
+    {% if member_dashboard %}
+    <p>
+    <a class="btn btn-primary" href="{{url_for('member_dashboard')}}" role="button">Return</a>
+    </p>
+    {% endif %}
+
+    {% if payment %}
+    <p>
+        <a class="btn btn-primary" href="{{url_for('make_a_payment')}}" role="button">Go to Payments</a>
+    </p>
+    {% endif %}
+    
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "_layout.html" %}
+
+{% block title %}Attendance Report{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function () {
+        var dateFormat = "mm/dd/yy",
+            from = $("#from")
+                .datepicker({
+                    defaultDate: "-1y",
+                    changeMonth: true,
+                    numberOfMonths: 2
+                })
+                .on("change", function () {
+                    to.datepicker("option", "minDate", getDate(this));
+                }),
+            to = $("#to").datepicker({
+                defaultDate: "-1d",
+                changeMonth: true,
+                numberOfMonths: 2
+            })
+                .on("change", function () {
+                    from.datepicker("option", "maxDate", getDate(this));
+                });
+
+        function getDate(element) {
+            var date;
+            try {
+                date = $.datepicker.parseDate(dateFormat, element.value);
+            } catch (error) {
+                date = null;
+            }
+
+            return date;
+        }
+    });
+</script>
+
+<div class="container">
+
+<p>Please select the period that you would like to view attendance for:</p>
+
+<form action='/check_attendance' method='POST'>
+    <label for="from">Start Date</label>
+    <input type="text" id="from" name="from" required />
+    <label for="to">End Date</label> 
+    <input type="text" id="to" name="to" required><br />
+    <input type="submit" value="Go" />
+</form>
+
+<br />
+<hr />
+<br />
+</div>
+
+{% if posted %}
+<div class="container">
+Showing attendance for {{ start_date|datetimefilter(format='%B %d, %Y') }} to {{ end_date|datetimefilter(format='%B %d, %Y') }} <br />
+
+    {% if session["role"] == 'manager' %}
+    <h3>Gym attendance </h3>
+    <p>Total members: {{ attendance_dict["total_gym"] }}</p>
+    <p>Unique members: {{ attendance_dict["unique_gym"] }}</p>
+
+    <h3>Personal training attendance </h3>
+    <p>Total members: {{ attendance_dict["total_training"] }}</p>
+    <p>Unique members: {{ attendance_dict["unique_training"] }}</p>
+
+    <h3>Class attendance </h3>
+    <p>Total members: {{ attendance_dict["total_class"] }}</p>
+    <p>Unique members: {{ attendance_dict["unique_class"] }}</p>
+    <br />
+
+    <h3>Personal Training Sessions</h3>
+    <table class="table table-sm table-striped table-bordered table-hover">
+        <thead class="table-primary">
+            <th>Trainer</th>
+            <th>Number of members that have attended a personal training session with them</th>
+        </thead>
+        {% for trainer in trainer_count %}
+        <tr>
+            <td>{{ trainer.first_name}} {{trainer.last_name}}</td>
+            <td>{{ trainer.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br />
+
+    <h3>Group Classes</h3>
+    <table class="table table-sm table-striped table-bordered table-hover">
+        <thead class="table-primary">
+            <th>Group Class</th>
+            <th>Number of members that have attended that class</th>
+        </thead>
+        {% for class in class_count %}
+        <tr>
+            <td>{{ class.class_name}}</td>
+            <td>{{ class.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% elif session['role'] == 'trainer' %}
+    <br />
+    <h3>Personal training attendance </h3>
+    <p>Total members that have attended a session with you: {{ attendance_dict["total_training"] }}</p>
+    <p>Unique members that have attended a session with you: {{ attendance_dict["unique_training"] }}</p>
+
+    <h3>Your group class attendance</h3>
+    <table class="table table-sm table-striped table-bordered table-hover">
+        <thead class="table-primary">
+            <th>Group Class</th>
+            <th>Number of members that have attended that class</th>
+        </thead>
+        {% for class in class_count %}
+        <tr>
+            <td>{{ class.class_name}}</td>
+            <td>{{ class.count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+
+{% endif %}
+{% endblock %}

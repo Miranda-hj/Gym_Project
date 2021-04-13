@@ -1,0 +1,37 @@
+{% extends "_layout.html" %}
+
+{% block title %}Member List{% endblock %}
+
+{% block body %}
+
+<form method="POST"></br>
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                {% for col in column_names %}
+                <th>{{col}}</th>
+                {% endfor %}
+                <th>Action</th>
+              </tr>
+            </thead>  
+            <tbody>
+              {% for result in db_members %}
+              <tr>
+                <td>{{result[0]}}</td>
+                <td>{{result[1]}}</td>
+                <td>{{result[2]}}</td>               
+                <td>
+                  <a href="/view_member_profile?member_id={{result[0]}}">View</a>
+                  {% if (session["role"] == 'manager') and (not are_archived)%}
+                  <a href="/update_member_profile?member_id={{result[0]}}">Update</a>
+                  <a href="/archive_member?member_id={{result[0]}}">Archive</a>
+                  {% endif %}
+                </td>               
+              </tr>
+              {% endfor %}
+              </tbody>
+        </table>
+    </div>
+</form>
+{% endblock %}

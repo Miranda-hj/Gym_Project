@@ -1,0 +1,29 @@
+{% extends "_layout.html" %}
+
+{% block title %}Make A payment{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Payment</h1>
+    {% if amount_owed < 0 %}
+    <p>Your account is currently in credit ${{amount_owed|abs}} </p>
+    {% else %}
+    <p>You currently owe: ${{amount_owed}}</p>
+    {% endif %}
+
+    <p>Your subscription type is: {{subscription_type}} <br />
+    The {{subscription_type|lower}} subscription fee is: ${{ subscription_fee }}</p>
+    <p>Your subscription will automatically roll over on: {{date_due|datetimefilter}}</p>
+    
+    {% from "_form_helper.html" import render_field %}
+        <form method="POST">
+            {{ form.csrf_token }}
+        <dl>
+            {{ render_field(form.num_of_weeks_pay_for) }}           
+        </dl>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary")}}
+        </div>
+    </form>
+</div
+{% endblock %}

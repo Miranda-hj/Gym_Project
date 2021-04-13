@@ -1,0 +1,23 @@
+{% extends "_layout.html" %}
+
+{% block title %}Gym Check-In{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <form method="POST">
+    <h1>Welcome to the check-in system</h1>
+    <p> Please select what you would like to do</p>
+    <div class="row">
+      <div class="col-sm-6">
+          <input class="btn btn-primary" type="submit" value="Check in to the gym" onclick="alert('You have successfully checked in.')">
+      </div>
+  </div></br>
+</form>
+
+  <a class="btn btn-primary" href="/class_checkin" role="button">Check in to a class</a>
+  <br></br>
+  <a class="btn btn-primary" href="/session_checkin" role="button">Check in to personal training session</a>
+</div>
+
+{% endblock %}

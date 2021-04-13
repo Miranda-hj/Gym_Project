@@ -1,0 +1,50 @@
+.header {
+padding: 60px;
+text-align: right;
+background:url('Boxer.jpg');
+color: blue;
+font-size: 50px;
+font-family: "Tahoma", sans-serif; 
+font-weight: bold;
+}
+
+body p.datenumber {
+    font-size: .7em;
+    text-align: right;
+    color: rgb(83, 74, 74);
+}
+
+
+.form_btn{
+    display:flex; 
+    justify-content:flex-end; 
+    width:100%; 
+    padding:10px;
+}
+
+.message{
+    margin-top: 20px;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    min-height: 10em;
+    font-size: larger;
+}
+
+.text_align_center{
+    text-align: center;
+}
+
+.form_wrapper{
+    width: 95em;
+    margin: 0 auto;  
+    padding: 1.5em;
+}
+
+.error_message{
+    color: red;
+}
+
+.financial_report_table{
+    display: none;
+}

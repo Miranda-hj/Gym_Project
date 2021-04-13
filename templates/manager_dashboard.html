@@ -1,0 +1,19 @@
+{% extends "_layout.html" %}
+
+{% block title %}Manager Dashboard{% endblock %}
+
+{% block body %}
+
+<h1>Welcome to the manager dashboard</h1>
+<p> Please select what you would like to do</p>
+<a class="btn btn-primary" href="add_new_member" role="button">Add a new gym member</a>
+<a class="btn btn-primary" href="/member_list" role="button">Update or archive a member </a>
+<a class="btn btn-primary" href="/add_trainer" role="button">Add a new trainer</a>
+<a class="btn btn-primary" href="/update_archive_trainer" role="button">Update or archive a trainer</a>
+<a class="btn btn-primary" href="/add_class" role="button">Add a new class</a> <br> <br>
+<a class="btn btn-primary" href="check_attendance" role="button">View attendance report</a>
+<a class="btn btn-primary" href="financial_report" role="button">View financial report</a>
+<a class="btn btn-primary" href="member_subscriptions" role="button">Send member subscription notifications</a>
+<a class="btn btn-primary" href="newsletter" role="button">Send member newsletter</a>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "_layout.html" %}
+
+{% block title %}Training session - confirm and pay{% endblock %}
+
+{% block body %}
+    <div class="container-md">
+        <div>           
+        {% from "_form_helper.html" import render_field %}
+        <form method="POST" class="form_wrapper container">
+            {{ form.csrf_token }}
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h3>Session</h3>
+                        {{ render_field(form.session_date, readonly) }}
+                        {{ render_field(form.session_time, readonly) }}
+                        <p>In submitting this booking, you agree to pay $50 for this training</p> 
+                    </div>
+                </div>                  
+            
+            <div class="form_btn">
+             {{form.submit(class="btn btn-primary")}}
+            </div>
+            </form>
+        </div>
+{% endblock %}

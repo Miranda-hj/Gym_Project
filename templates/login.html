@@ -1,0 +1,24 @@
+{% extends "_layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <div class="container-md">                  
+        {% from "_form_helper.html" import render_field %}
+            <form method="POST" class="form_wrapper container">
+                {{ form.csrf_token }}
+                {{ render_field(form.email) }}
+                {{ render_field(form.password) }}
+                {% if message %}
+                    <p class="error_message">{{message}}</p>
+                {% endif %}
+                <div class="form_btn">
+                    {{ form.submit(class="btn btn-primary")}} 
+                    <a class="btn btn-light" href="/reset_password" role="button">Forget password?</a>
+                </div>
+                <div class="form_btn">
+                    <a class="btn btn-primary" href="member_registration" role="button">Sign Up</a>
+                </div>               
+            </form>         
+    </div>
+{% endblock %}

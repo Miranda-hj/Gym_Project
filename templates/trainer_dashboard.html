@@ -1,0 +1,12 @@
+{% extends "_layout.html" %}
+
+{% block title %}Trainer Dashboard{% endblock %}
+
+{% block body %}
+    <h1>Welcome to the trainer dashboard</h1>
+    <p> Please select what you would like to do</p>
+    <a class="btn btn-primary" href="/trainer_profile" role="button">View and/or update your profile</a>
+    <a class="btn btn-primary" href="/member_list" role="button">View a member profile</a>
+    <a class="btn btn-primary" href="/trainer_schedule" role="button">View and/or update your schedule</a>
+    <a class="btn btn-primary" href="check_attendance" role="button">Attendance report</a>
+{% endblock %}

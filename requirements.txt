@@ -1,0 +1,15 @@
+pip install flask
+pip install psycopg2
+pip install flask_wtf
+pip install email_validator
+pip install flask_mail
+pip install https://github.com/maxcountryman/flask-uploads.git@f66d7dc
+
+
+
+Flask-uploads is most easily installed using:
+pip install https://github.com/maxcountryman/flask-uploads.git@f66d7dc
+
+If it is throwing Werkzeug errors, try installing the following versions:
+pip install -U Werkzeug==0.16.0
+pip install flask_uploads

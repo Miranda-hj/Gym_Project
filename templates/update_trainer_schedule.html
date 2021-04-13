@@ -1,0 +1,35 @@
+{% extends "_layout.html" %}
+
+{% block title %}Add Training Session{% endblock %}
+
+{% block body %}
+    <div class="container-md">
+
+
+        <div>           
+        {% from "_form_helper.html" import render_field %}
+        <form method="POST" class="form_wrapper container">
+            {{ form.csrf_token }}
+            
+            <div class="row">
+                <div class="col">
+        
+                    <div>
+                        <h3>Add a Personal Training Session</h3>
+                        <h4 style="color:blue;">{{ message }}</h4>
+                        {{ render_field(form.session_date) }}
+                        {{ render_field(form.session_time) }}
+                    </div>
+                </div>                  
+            
+            <div class="form_btn">
+
+             {{form.submit(class="btn btn-primary")}}
+               
+
+            </div>
+            
+                
+            </form>
+        </div>
+{% endblock %}

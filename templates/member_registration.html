@@ -1,0 +1,56 @@
+{% extends "_layout.html" %}
+
+{% block title %}Member Registration{% endblock %}
+
+{% block body %}
+<div class="container-md">
+
+    {% if version== 'v1' %}
+    <h1 class="text_align_center">Add New Member</h1>
+    {% else %}
+    <h1 class="text_align_center">Start Your Journey Today</h1>
+    {% endif %}
+
+    {% from "_form_helper.html" import render_field %}
+    <form method="POST" class="form_wrapper container">
+        <dl>
+            {{ form.csrf_token }}
+            <div class="row">
+                <div class="col">
+                    {{ render_field(form.first_name) }}
+                    {{ render_field(form.email) }}
+                    {% if version== 'v2' %}
+                        {{ render_field(form.password) }}
+                    {% endif %}
+                    {{ render_field(form.dob) }}
+                </div>
+                <div class="col">
+                    
+                    {{ render_field(form.last_name) }}
+                    {{ render_field(form.phone) }}
+                    {% if version== 'v2' %}
+                        {{ render_field(form.confirm_password) }}
+                    {% endif %}
+                    {{ render_field(form.gender) }}
+                </div>
+            </div>
+            
+            {{ render_field(form.address) }}
+            <div class="row">
+                <div class="col">
+                    {{ render_field(form.emergency_name) }}
+                </div>
+                <div class="col">                   
+                    {{ render_field(form.emergency_phone) }}
+                </div>
+            </div>
+            
+            {{ render_field(form.subscription_type) }}
+    
+        </dl>
+        <div class="form_btn">
+            {{ form.submit(class="btn btn-primary")}}
+        </div>
+    </form>
+</div>
+{% endblock %}

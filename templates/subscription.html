@@ -1,0 +1,51 @@
+{% extends "_layout.html" %}
+
+{% block title %}Subscription{% endblock %}
+
+{% block body %}
+
+<form method="POST"></br>
+  <div class="container">
+      {% if result %}
+      <h3>Your current subscription type is: {{result.subscription_type}}</h3>
+      <h3>Your membership will roll over on: {{result.date_due|datetimefilter}}</h3>
+      {% endif %}
+      <br>
+      <p>The subscription fees are as follows:</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Subscription type</th>
+            <th scope="col">Fee</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Weekly</td>
+            <td>$15</td>
+          </tr>
+          <tr>
+            <td>Monthly</td>
+            <td>$60</td>
+          </tr>
+          <tr>
+            <td>Yearly</td>
+            <td>$720</td>
+          </tr>
+        </tbody>
+      </table>
+        <br>
+
+        <div class="form-group">
+            <label for="subscription">Change my subscription type </label>
+            <select class="form-control" id="subscription" name="subscription" required>
+                <option>Weekly</option>
+                <option>Monthly</soption>
+                <option>Yearly</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Change Subscription</button>
+
+  </div>
+</form>
+{% endblock %}

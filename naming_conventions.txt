@@ -1,0 +1,2 @@
+For functions, variables and html pages, use snake case
+For names of things within html forms, use words without space

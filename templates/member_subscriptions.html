@@ -1,0 +1,25 @@
+{% extends "_layout.html" %}
+
+{% block title %}Member Subscription Notices{% endblock %}
+
+{% block body %}
+<div class="container">
+<p>
+    There are {{soon_count}} members whose subscription will renew in less than 5 days and who have not prepaid. <br />
+    Would you like to send them an email reminder?
+    <form method="POST">
+        <input type="hidden" name="type" id="type" value="soon" />
+        <input type="submit" class="btn btn-primary" value="Send Email Reminder" />
+    </form>
+</p>
+
+<p>
+    There are {{overdue_count}} members who owe money on their subscription.
+    Would you like to send them an email reminder?
+    <form method="POST">
+        <input type="hidden" name="type" id="type" value="overdue" />
+        <input type="submit" class="btn btn-primary" value="Send Email Reminder" />
+    </form>
+</p>
+</div>
+{% endblock %}

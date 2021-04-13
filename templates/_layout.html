@@ -1,0 +1,157 @@
+<!-- 
+    Any html that applies to the whole web-app
+   -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock scripts %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div class="header">
+        <br>
+        <h1>Web App Project 1</h1>
+        <p>Lincoln Fitness</p>
+    </div>
+    
+    {% if do_not_show_nav %}
+    <nav></nav>
+
+    {% elif session["role"] == 'manager'%}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="
+        /manager_dashboard">Manager</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Members
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/add_new_member">Add a new gym member</a>
+                        <a class="dropdown-item" href="/member_list">View active member profiles</a>
+                        <a class="dropdown-item" href="/archived_member_list">View archived member profiles</a>
+                        <a class="dropdown-item" href="/check_attendance">Check attendance</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/member_subscriptions">Send member subscription notifications</a>
+                        <a class="dropdown-item" href="/newsletter">Send member newsletter</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Trainers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/add_trainer">Add a new trainer</a>
+                        <a class="dropdown-item" href="/update_archive_trainer">Update or archive a trainer</a>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/add_class">Add a class <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/financial_report">Financial Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/check_attendance">Attendance Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {% elif session["role"] == 'trainer'%}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/trainer_dashboard">Trainer</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/trainer_profile">Update/view profile <span class="sr-only">(current)</span></a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/member_list">View member profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/trainer_schedule">View/update your schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/check_attendance">Attendance report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    {% elif session["role"] == 'member'%}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/member_dashboard">Member</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/view_member_profile">Update/view profile <span class="sr-only">(current)</span></a>
+                  </li>
+                <li class="nav item">
+                    <a class="nav-link" href="/member_schedule">View your bookings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/meet_trainer">Book a trainer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/group_class_calendar">Book a class</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/check_in">Check in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/make_a_payment">Make a payment / View subscription details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/subscription">Update subscription</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endif %}
+
+    {% block body %}{% endblock %}
+
+</body>
+
+</html>

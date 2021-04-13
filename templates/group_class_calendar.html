@@ -1,0 +1,45 @@
+{% extends "_layout.html" %}
+
+{% block title %}Group Class Schedule{% endblock %}
+
+{% block body %}
+<h1>Group Class Schedule </h1>
+<p> This is the schedule for next week. Please select a class to register. </p>
+
+<table class="table table-striped">
+    <thead class = "table-dark">
+        <tr class = "table-bordered" >
+            {% for day in day_names %}
+                <th>{{ day }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody class="table-primary table-bordered">
+        <tr>
+            {% for day in weekdates %}
+            <td><p class="datenumber">{{ day[0] }}</p>
+                {% for session in day[1] %}
+                    {% if session.registrees >= 30 %}
+                        {{ session.session_time }} {{ session.class_name }} <br />
+                    {% elif session.memberid == memberid|int %}
+                    {# meaning that the member is already registered for the class #}
+                        {{ session.session_time }} {{ session.class_name }} <br />
+                    {% else %}
+                    <form action='/group_class_calendar' method='POST'>
+                        <input type = 'hidden' name='sessionid' id='sessionid' value = '{{ session.sessionid }}' />
+                        <input type='submit' value='{{ session.session_time|timefilter }} {{ session.class_name }}' />
+                    </form>
+                    {% endif %}
+                {% endfor %}
+            </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+
+<h2 style="color:blue; text-indent: 7%;">
+    {% if message %}
+    {{ message }}
+    {% endif %}
+</h2>
+{% endblock %}

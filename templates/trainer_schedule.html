@@ -1,0 +1,61 @@
+{% extends "_layout.html" %}
+
+{% block title %}Trainer schedule{% endblock %}
+
+{% block body %}
+
+<form method="POST"></br>
+  <div class="container">
+      <div class="row">
+        <h3>Personal Training sessions</h3>
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Member Booked</th>
+              </tr>
+            </thead>  
+            <tbody>
+              {% for result in db_training %}
+              <tr>
+                <td>{{result[0]|datetimefilter}}</td>
+                <td>{{result[1]|timefilter}}</td>
+                <td>
+                  {% if result.first_name %}
+                  {{ result.first_name }} {{ result.last_name }}
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+              </tbody>
+        </table>
+      </div>
+      <br>
+      <div class="row">
+        <h3>Group class sessions</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Duration</th>
+            </tr>
+          </thead>  
+          <tbody>
+            {% for result in class_result %}
+            <tr>
+              <td>{{result[0]}}</td>
+              <td>{{result[1]}}</td>
+              <td>{{result[2]|timefilter}}</td>
+              <td>{{result[3]}} minutes</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+      </table>
+      </div>
+      <a class="btn btn-primary" href="/update_trainer_schedule" role="button">Add new session</a>
+    </div>
+</form>
+{% endblock %}

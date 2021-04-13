@@ -1,0 +1,47 @@
+{% extends "_layout.html" %}
+
+{% block title %}Find a trainer{% endblock %}
+
+{% block body %}
+
+<form method="POST" action="">
+
+  <div class="container">
+    <h2>Trainer Detail</h3>
+    <div class="row">
+      <div class="col-sm-5">
+        <br></br>
+        {% if result %}
+        <img src="{{result[6]}}" width="350">       
+      </div>
+      <div class="col-sm-5">
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="{{result[1]}}" readonly="readonly">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="{{result[2]}}" readonly="readonly">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Gender</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="{{result[8]}}" readonly="readonly">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Email Address</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="{{result[3]}}" readonly="readonly">
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">specialties</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="{{result[11]}}" readonly="readonly">
+        </div>
+      </div>
+    </div></br>
+    <a class="btn btn-primary" href="/book_personal_training?trainer_id={{result[0]}}" role="button">Book the trainer</a>
+    {% endif %}
+  </div>
+
+  </div>
+</form>
+{% endblock %}
+

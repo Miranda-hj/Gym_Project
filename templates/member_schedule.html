@@ -1,0 +1,44 @@
+{% extends "_layout.html" %}
+
+{% block title %}Member Schedule{% endblock %}
+
+{% block body %}
+<div class="container">
+    <br />
+    <p>These are your upcoming bookings:</p>
+    <br />
+
+    <h3>Personal Training Sessions</h3>
+    <table class="table table-sm table-striped table-bordered table-hover">
+        <thead class="table-primary">
+            <th>Trainer</th>
+            <th>Date</th>
+            <th>Time</th>
+        </thead>
+        {% for trainer in trainer_count %}
+        <tr>
+            <td>{{ trainer.first_name}} {{trainer.last_name}}</td>
+            <td>{{ trainer.session_date|datetimefilter }}</td>
+            <td>{{ trainer.session_time|timefilter }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br />
+
+    <h3>Classes</h3>
+    <table class="table table-sm table-striped table-bordered table-hover">
+        <thead class="table-primary">
+            <th>Group Class</th>
+            <th>Date</th>
+            <th>Time</th>
+        </thead>
+        {% for class in class_count %}
+        <tr>
+            <td>{{ class.class_name}}</td>
+            <td>{{ class.session_date|datetimefilter }}</td>
+            <td>{{ class.session_time|timefilter }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

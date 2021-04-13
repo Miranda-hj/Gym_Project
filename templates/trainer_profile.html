@@ -1,0 +1,80 @@
+{% extends "_layout.html" %}
+
+{% block title %}Trainer Profile{% endblock %}
+
+{% block body %}
+    <div class="container-md">
+
+
+        <div>           
+        {% from "_form_helper.html" import render_field %}
+        <form method="POST" enctype="multipart/form-data" class="form_wrapper container">
+            {{ form.csrf_token }}
+            
+            <div class="row">
+                <div class="col">
+                    <div>
+                        <h3>Login Details</h3>
+                        {% if trainer %}
+                        <img src="{{trainer.image}}" width="215">
+                        {% endif %}
+
+                        {{ render_field(form.email, True) }}
+                    </div>
+                    <p>
+        
+                    <div>
+                        <h3>Emergency Details</h3>
+                        {{ render_field(form.emergency_name, readonly) }}
+                        {{ render_field(form.emergency_phone, readonly) }}
+                    </div>
+                </div>
+    
+                <div class="col">
+                    <h3>Personal Details</h3>
+                    <div class="row ">
+                        <span class="col">{{ render_field(form.first_name, readonly) }}</span>
+                        <span class="col">{{ render_field(form.last_name, readonly) }}</span>
+                    </div>
+                    <div class="row">
+                        <span class="col">{{ render_field(form.dob, True) }}</span>
+                        <span class="col">{{ render_field(form.gender, readonly) }}</span>
+                    </div>                                       
+                    {{ render_field(form.address, readonly) }}
+                    {{ render_field(form.phone, readonly) }} 
+                    {{ render_field(form.image, readonly) }}
+                    {{ render_field(form.specialties, readonly) }}
+                </div>
+            </div>                   
+            
+            <div class="form_btn">
+                {% if (session['role'] == 'trainer') and (version== 'view_trainer_profile')%}
+                <a type="button" 
+                    class="btn btn-primary"
+                    href="/update_trainer_profile">
+                    Update
+                </a>
+                {% endif %}
+
+                {% if (session['role'] == 'manager') and (version== 'view_trainer_profile') %}
+                <a type="button" 
+                class="btn btn-primary"
+                href="/update_trainer_profile?user_id={{trainer.userid}}">
+                Update
+                </a>
+                {% endif %}
+
+                {% if version== 'update_trainer_profile' %}
+                <a type="button"  
+                class="btn btn-light"
+                href="/trainer_profile?user_id={{trainer.userid}}">
+                Cancel
+                </a>
+                {{ form.submit(class="btn btn-primary")}}            
+                {% endif %}
+            </div>
+            
+                
+            </form>
+        </div>
+{% endblock %}

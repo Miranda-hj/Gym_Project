@@ -1,0 +1,43 @@
+{% extends "_layout.html" %}
+
+{% block title %}Add Trainer{% endblock %}
+
+{% block body %}
+<div class="container-md">
+    <h1 class="text_align_center">Add a new trainer</h1>
+    {% from "_form_helper.html" import render_field %}
+    <form method="POST" enctype="multipart/form-data" class="form_wrapper container">
+        <dl>
+            {{ form.csrf_token }}
+            <div class="row">
+                <div class="col">
+                    {{ render_field(form.first_name, False) }}
+                    {{ render_field(form.email) }}
+                    {{ render_field(form.dob) }}
+                </div>
+                <div class="col">
+                    {{ render_field(form.last_name) }}
+                    {{ render_field(form.phone) }}
+                    {{ render_field(form.gender) }}
+                </div>
+            </div>           
+            {{ render_field(form.address) }}  
+            <div class="row">
+                <div class="col">
+                    {{ render_field(form.emergency_name) }}
+                </div>
+                <div class="col">
+                    {{ render_field(form.emergency_phone) }}
+                </div>
+            </div>                        
+            {{ render_field(form.image) }}
+            {{ render_field(form.specialties) }}
+    
+        </dl>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary")}}
+        </div>  
+    </form>  
+</div>
+{% endblock %}
+    
