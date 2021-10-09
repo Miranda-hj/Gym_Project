@@ -21,7 +21,7 @@
 <body>
     <div class="header">
         <br>
-        <h1>Web App Project 1</h1>
+        <h1>Member Management System</h1>
         <p>Lincoln Fitness</p>
     </div>
     
@@ -29,7 +29,7 @@
     <nav></nav>
 
     {% elif session["role"] == 'manager'%}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="
         /manager_dashboard">Manager</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -81,7 +81,7 @@
     </nav>
 
     {% elif session["role"] == 'trainer'%}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/trainer_dashboard">Trainer</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -111,7 +111,7 @@
     </nav>
 
     {% elif session["role"] == 'member'%}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/member_dashboard">Member</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>

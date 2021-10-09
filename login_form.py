@@ -17,7 +17,7 @@ class LoginForm(FlaskForm):
     password = PasswordField(label='Password *', validators=[
         validators.DataRequired(),
         ])
-    submit = SubmitField(label=('Login'))
+    submit = SubmitField(label=('Sign In'))
 
     def validate_email(self, email):
         validate_email(email)

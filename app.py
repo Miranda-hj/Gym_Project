@@ -811,6 +811,7 @@ def login():
             if user:                 
                 session['loggedin'] = True
                 session['id'] = user.userid
+                session['name'] = user.name
                 session['username'] = user.email
                 session['role'] = user.role
 
@@ -844,6 +845,7 @@ Please contact the gym at lincolnunifitness@gmail.com with any further questions
 def logout():
     session.pop('loggedin', None)
     session.pop('id', None)
+    session.pop('name', None)
     session.pop('username', None)
     session.pop('role', None)
     # Redirect to login page
